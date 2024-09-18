@@ -35,10 +35,11 @@
 
 Создать и применить миграции
 ```
-  python manage.py migrate
-```
-```
   python manage.py makemigrations
+```
+
+```
+  python manage.py migrate
 ```
 
 Создать сущность админа
@@ -71,11 +72,11 @@ Swagger документация http://127.0.0.1:8000/api/schema/swagger-ui/<br
 ### Запуск тестов
 
 ```
-  poetry pytest 
+   pytest 
 ```
  
 ```
-  poetry pytest --cov
+  pytest --cov
 ```
 
 

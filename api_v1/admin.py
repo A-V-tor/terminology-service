@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import HandBook, HandBookElement, VersionHandBook
 
 
@@ -7,14 +8,19 @@ class VersionHandBookInline(admin.TabularInline):
     extra = 0
 
 
-
 class HandBookElementInline(admin.TabularInline):
     model = HandBookElement
     extra = 0
 
 
 class HandBookAdmin(admin.ModelAdmin):
-    list_display = ('id', 'uniq_code', 'title', 'latest_version', 'latest_version_date')
+    list_display = (
+        'id',
+        'uniq_code',
+        'title',
+        'latest_version',
+        'latest_version_date',
+    )
     list_filter = (
         'uniq_code',
         'title',
@@ -23,19 +29,24 @@ class HandBookAdmin(admin.ModelAdmin):
 
     def latest_version(self, obj):
         latest_version = obj.versions.order_by('-version_start_date').first()
-        return latest_version.version if latest_version else "N/A"
+        return latest_version.version if latest_version else 'N/A'
 
     latest_version.short_description = 'Последняя версия'
 
     def latest_version_date(self, obj):
         latest_version = obj.versions.order_by('-version_start_date').first()
-        return latest_version.version_start_date if latest_version else "N/A"
+        return latest_version.version_start_date if latest_version else 'N/A'
 
     latest_version_date.short_description = 'Дата начала действия'
 
 
 class VersionHandBookAdmin(admin.ModelAdmin):
-    list_display = ('handbook_uniq_code', 'handbook_title', 'version', 'version_start_date')
+    list_display = (
+        'handbook_uniq_code',
+        'handbook_title',
+        'version',
+        'version_start_date',
+    )
     list_filter = (
         'version',
         'version_start_date',
@@ -59,12 +70,9 @@ class VersionHandBookAdmin(admin.ModelAdmin):
     handbook_display.short_description = 'Справочник'
 
 
-
 class HandBookElementAdmin(admin.ModelAdmin):
     list_display = ('uniq_code', 'value')
-    list_filter = (
-        'uniq_code',
-    )
+    list_filter = ('uniq_code',)
     list_select_related = ('version_hand_book',)
 
 
